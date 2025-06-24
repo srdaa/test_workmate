@@ -1,0 +1,3 @@
+-w / --where фильтрация по столбцам
+-a / --aggregate агрегация 
+-o / --order by сортировка(desc/asc)
