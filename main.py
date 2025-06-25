@@ -24,7 +24,7 @@ def read_csv(file: str) -> list[dict]:
 
 
 
-def where(table: list[dict], args: str) -> list[dict]:
+def where(table: list[dict], args: str) -> list[dict] | None:
     column = None
     try:
         column, sep, value = re.split(r'([=<>])', args)
@@ -43,6 +43,7 @@ def where(table: list[dict], args: str) -> list[dict]:
         raise InvalidColumnName(column_name=column)
     except ValueError:
         raise InvalidFormat()
+    return None
 
 
 
@@ -67,7 +68,7 @@ def order_by(table: list[dict], args:str) -> list[dict]:
         raise InvalidFormat()
 
 
-def aggregate(table: list[dict], args: str) -> list[dict[str, int]] :
+def aggregate(table: list[dict], args: str) -> list[dict[str, int | float]] :
     column, value = None, None
     
     try:
@@ -98,7 +99,7 @@ def main() -> None:
             result_table = where(table=result_table, args=args.where)
         except BaseException as e:
             print(e.message)
-            return 
+            return None
 
     if args.order_by:
         try:
@@ -106,7 +107,7 @@ def main() -> None:
                 result_table = order_by(table=result_table, args=args.order_by)
         except BaseException as e:
             print(e.message)
-            return 
+            return None
 
     if args.aggregate:
         try:
@@ -116,9 +117,10 @@ def main() -> None:
                 return None
         except BaseException as e:
             print(e.message)
-            return 
+            return None
     
     print(tabulate(result_table, headers="keys"))
+    return None
 
 
 if __name__ == "__main__":
