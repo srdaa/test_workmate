@@ -1,8 +1,8 @@
 -w / --where фильтрация по столбцам (при использовании < > записывать в кавычках: --where "age<40")
 
--a / --aggregate агрегация 
+-a / --aggregate агрегация (-a age=min/max/avg)
 
--o / --order by сортировка(desc/asc)
+-o / --order by сортировка(desc/asc) (-o age=asc/desc)
 
 -f / --file путь до файла
 
